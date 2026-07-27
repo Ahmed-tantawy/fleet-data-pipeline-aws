@@ -83,3 +83,28 @@ module "vpc" {
   az_1 = "eu-central-1a"
   az_2 = "eu-central-1b"
 }
+
+resource "aws_security_group" "ansible_target" {
+  name        = "fleet-ansible-target-sg"
+  description = "Allow SSH from my IP for Ansible lab"
+  vpc_id      = module.vpc.vpc_id
+
+  ingress {
+    description = "SSH from my IP"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [var.my_ip_cidr]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "fleet-ansible-target-sg"
+  }
+}
