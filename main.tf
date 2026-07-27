@@ -108,3 +108,32 @@ resource "aws_security_group" "ansible_target" {
     Name = "fleet-ansible-target-sg"
   }
 }
+
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["al2023-ami-*-x86_64"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
+resource "aws_instance" "ansible_target" {
+  ami                    = data.aws_ami.amazon_linux.id
+  instance_type          = "t3.micro"
+  subnet_id              = module.vpc.public_subnet_ids[0]
+  key_name               = aws_key_pair.ansible.key_name
+  vpc_security_group_ids = [aws_security_group.ansible_target.id]
+
+  associate_public_ip_address = true
+
+  tags = {
+    Name = "fleet-ansible-target"
+  }
+}
