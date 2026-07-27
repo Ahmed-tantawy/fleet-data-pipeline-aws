@@ -37,3 +37,7 @@ variable "az_2" {
   description = "Second availability zone"
   type        = string
 }
+variable "my_ip_cidr" {
+  description = "Your IP address in CIDR notation, for SSH access"
+  type        = string
+}
