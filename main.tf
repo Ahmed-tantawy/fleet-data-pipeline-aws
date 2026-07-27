@@ -1,3 +1,74 @@
+moved {
+  from = aws_vpc.fleet
+  to   = module.vpc.aws_vpc.this
+}
+
+moved {
+  from = aws_subnet.public_1a
+  to   = module.vpc.aws_subnet.public_1a
+}
+
+moved {
+  from = aws_subnet.public_1b
+  to   = module.vpc.aws_subnet.public_1b
+}
+
+moved {
+  from = aws_subnet.private_1a
+  to   = module.vpc.aws_subnet.private_1a
+}
+
+moved {
+  from = aws_subnet.private_1b
+  to   = module.vpc.aws_subnet.private_1b
+}
+
+moved {
+  from = aws_internet_gateway.fleet
+  to   = module.vpc.aws_internet_gateway.this
+}
+
+moved {
+  from = aws_eip.nat
+  to   = module.vpc.aws_eip.nat
+}
+
+moved {
+  from = aws_nat_gateway.fleet
+  to   = module.vpc.aws_nat_gateway.this
+}
+
+moved {
+  from = aws_route_table.public
+  to   = module.vpc.aws_route_table.public
+}
+
+moved {
+  from = aws_route_table.private
+  to   = module.vpc.aws_route_table.private
+}
+
+moved {
+  from = aws_route_table_association.public_1a
+  to   = module.vpc.aws_route_table_association.public_1a
+}
+
+moved {
+  from = aws_route_table_association.public_1b
+  to   = module.vpc.aws_route_table_association.public_1b
+}
+
+moved {
+  from = aws_route_table_association.private_1a
+  to   = module.vpc.aws_route_table_association.private_1a
+}
+
+moved {
+  from = aws_route_table_association.private_1b
+  to   = module.vpc.aws_route_table_association.private_1b
+}
+
+
 module "vpc" {
   source = "./modules/vpc"
 
