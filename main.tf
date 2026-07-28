@@ -137,3 +137,13 @@ resource "aws_instance" "ansible_target" {
     Name = "fleet-ansible-target"
   }
 }
+
+resource "tls_private_key" "ansible_ssh" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "aws_key_pair" "ansible" {
+  key_name   = "fleet-ansible-key"
+  public_key = tls_private_key.ansible_ssh.public_key_openssh
+}
