@@ -90,11 +90,11 @@ resource "aws_security_group" "ansible_target" {
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    description = "SSH from my IP"
+    description = "SSH temporarily open - TIGHTEN BEFORE MOVING ON"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [var.my_ip_cidr]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
